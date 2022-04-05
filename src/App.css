@@ -11,24 +11,13 @@
 
 
 
-.header {
-  grid-area: h;
-  background-color: darkolivegreen;
-}
 
-.nav {
-  grid-area: n;
-  background-color: burlywood;
-}
 
-.content {
-  grid-area: c;
-  background-color: cornflowerblue;
-}
 
-.header img {
-  width: 60px;
-}
+
+
+
+
 
 .App {
   text-align: center;
