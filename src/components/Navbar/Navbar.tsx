@@ -1,21 +1,26 @@
-import React from 'react';
-import s from './Navbar.module.css';
-
-/* classes is object that created unique class-names for tags
-let classes = {
-    nav: 'nav_sadfi4r9343',
-    item: 'item_df345345345'
-}*/
+import React from "react";
+import {NavLink} from "react-router-dom";
+import s from "./Navbar.module.css";
 
 
 function Navbar() {
     return (
         <nav className={s.nav}>
-            <a><div className={s.item}>Profile</div></a>
-            <a><div className={s.item}>Messages</div></a>
-            <a><div className={s.item}>News</div></a>
-            <a><div className={s.item}>Music</div></a>
-            <a><div className={s.item}>Settings</div></a>
+            <div className={s.item}>
+                <NavLink to="/profile" activeClassName={s.activeLink}>Profile</NavLink>
+            </div>
+            <div className={s.item}>
+                <NavLink to="/dialogs" activeClassName={s.activeLink}>Messages</NavLink>
+            </div>
+            <div className={s.item}>
+                <NavLink to="/news" activeClassName={s.activeLink}>News</NavLink>
+            </div>
+            <div className={s.item}>
+                <NavLink to="/music" activeClassName={s.activeLink}>Music</NavLink>
+            </div>
+            <div className={s.item}>
+                <NavLink to="/settings" activeClassName={s.activeLink}>Settings</NavLink>
+            </div>
         </nav>
     )
 }
