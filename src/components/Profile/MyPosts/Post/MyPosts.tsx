@@ -1,6 +1,6 @@
 import React from "react";
 import s from './MyPosts.module.css';
-import Post from "./Post/Post";
+import Post from "./Post";
 
 let textPost = "Hi everyone";
 let textPost2 = "How are u?";
@@ -12,11 +12,16 @@ let likes = [3, 5, 55];
 
 function MyPosts() {
     return (
-        <div>
-            My posts
+        <div className={s.postsBlock}>
+            <h3>My posts</h3>
             <div>
-                <textarea>123</textarea>
-                <button>Add post</button>
+                <div>
+                    <textarea>123</textarea>
+                </div>
+                <div>
+                    <button>Add post</button>
+                </div>
+
             </div>
             <div className={s.posts}>
                 <Post text={textPost} like={likes[0]}/>

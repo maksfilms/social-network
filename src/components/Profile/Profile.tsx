@@ -1,19 +1,13 @@
 import React from "react";
-import s from './Profile.module.css';
-import MyPosts from "./MyPosts/MyPosts";
+import s from "./Profile.module.css";
+import MyPosts from "./MyPosts/Post/MyPosts";
+import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
 function Profile() {
     return (
         <div>
-            <div>
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlCeVhPcF0B061dWx6Y2p6ZshztnAoVQI59g&usqp=CAU"/>
-            </div>
-            <div>
-                ava + description
-            </div>
-            <div>
-                <MyPosts />
-            </div>
+            <ProfileInfo/>
+            <MyPosts/>
         </div>
     )
 }
