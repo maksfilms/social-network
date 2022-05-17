@@ -6,7 +6,6 @@ type DialogsType = {
     name: string
     id: string
 }
-
 type MessageType = {
     message: string
 }
@@ -20,15 +19,31 @@ const DialogItem = (props: DialogsType) => {
     )
 }
 const Message = (props: MessageType) => {
-    return(
+    return (
         <div className={s.dialog}>
             {props.message}
         </div>
     )
 }
 
-
 export function Dialogs() {
+
+    const dialogsData = [
+        {id: 1, name: "Max"},
+        {id: 1, name: "Bob"},
+        {id: 1, name: "David"},
+        {id: 1, name: "Alex"},
+        {id: 1, name: "Mike"},
+    ]
+
+    const messagesData = [
+        {id: 1, message: "Hi!"},
+        {id: 1, message: "How are you?"},
+        {id: 1, message: "Nice to meet you."},
+        {id: 1, message: "What are you doing?"},
+        {id: 1, message: "Hi all!"}
+    ]
+
     return (
         <div className={s.dialogs}>
             <div className={s.dialogItems}>

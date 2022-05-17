@@ -1,16 +1,16 @@
 import React from "react";
-import s from './MyPosts.module.css';
+import s from "./MyPosts.module.css";
 import Post from "./Post";
-
-let textPost = "Hi everyone";
-let textPost2 = "How are u?";
-let textPost3 = "I'm fine!";
-
-let likes = [3, 5, 55];
-
+import {MessageType} from "./Post";
 
 
 function MyPosts() {
+
+    const postData: Array<MessageType> = [
+        {id: 1, message: "Hi! how are you?", likesCount: 12},
+        {id: 1, message: "My first post", likesCount: 13},
+    ]
+
     return (
         <div className={s.postsBlock}>
             <h3>My posts</h3>
@@ -21,12 +21,9 @@ function MyPosts() {
                 <div>
                     <button>Add post</button>
                 </div>
-
             </div>
             <div className={s.posts}>
-                <Post text={textPost} like={likes[0]}/>
-                <Post text={textPost2} like={likes[1]}/>
-                <Post text={textPost3} like={likes[2]}/>
+                <Post message={postData}/>
             </div>
         </div>
     )
