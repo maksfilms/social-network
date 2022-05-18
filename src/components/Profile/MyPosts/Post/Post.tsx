@@ -2,15 +2,11 @@ import React from "react";
 import s from "./Post.module.css";
 
 type PostPropsType = {
-    postData: any
-    likesCount: any
+    postData: string
+    likesCount: number
 }
 
-export type MessageType = {
-    id: any
-    message: any
-    likesCount: any
-}
+
 
 function Post(props: PostPropsType) {
     return (
