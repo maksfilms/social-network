@@ -11,15 +11,24 @@ type MyPostsPropsType = {
 function MyPosts(props: MyPostsPropsType) {
     let postsElement = props.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
 
+
+    let newPostElement= React.createRef<HTMLTextAreaElement>() // создаем ссылку на элемент
+
+    let onAddPost = () => {
+
+        let text = newPostElement.current?.value //берем значение у элемента по ссылке, проверяем есть ли current (элемент по ссылке) что бы TS не ругался
+    }
+
     return (
         <div className={s.postsBlock}>
             <h3>My posts</h3>
             <div>
                 <div>
-                    <textarea>123</textarea>
+                    <textarea ref={newPostElement}>123</textarea>
+                    {/*// присваиваем ссылку к тегу textarea*/}
                 </div>
                 <div>
-                    <button>Add post</button>
+                    <button onClick={onAddPost}>Add post</button>
                 </div>
             </div>
             <div className={s.posts}>

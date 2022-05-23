@@ -1,5 +1,3 @@
-
-
 export type PostDataType = {
     id: number
     message: string
@@ -14,18 +12,18 @@ export type MessagesType = {
     message: string
 }
 
-type ProfilePageType = {
+export type ProfilePageType = {
     posts: Array<PostDataType>
-    dialogs: Array<DialogsType>
-}
 
-type MessagesPageType = {
+}
+export type DialogsPageType = {
     messages: Array<MessagesType>
+    dialogs: Array<DialogsType>
 }
 
 export type StateType = {
     profilePage: ProfilePageType
-    messagesPage: MessagesPageType
+    dialogsPage: DialogsPageType
 
 }
 
@@ -38,16 +36,16 @@ export let state: StateType = {
             {id: 3, message: "Hello all", likesCount: 1},
             {id: 4, message: "My name is....", likesCount: 1},
             {id: 5, message: "My second post", likesCount: 13},
-        ],
+        ]
+    },
+    dialogsPage: {
         dialogs: [
             {id: 1, name: "Max"},
             {id: 2, name: "Bob"},
             {id: 3, name: "David"},
             {id: 4, name: "Alex"},
             {id: 5, name: "Mike"},
-        ]
-    },
-    messagesPage: {
+        ],
         messages: [
             {id: 1, message: "Hi!"},
             {id: 2, message: "How are you?"},
@@ -55,5 +53,5 @@ export let state: StateType = {
             {id: 4, message: "What are you doing?"},
             {id: 5, message: "Hi all!"}
         ]
-    }
+    },
 }
