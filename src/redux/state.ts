@@ -61,7 +61,7 @@ export let addPost = (postText: string) => {
     let newPost: PostDataType = {
         id: new Date().getTime(), //string
         message: postText,
-        likesCount: 3
+        likesCount: 0
     }
     state.profilePage.posts.push(newPost)
     rerenderEntireTree(state)
