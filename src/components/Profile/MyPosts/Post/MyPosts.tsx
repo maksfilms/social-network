@@ -6,7 +6,9 @@ import {PostDataType} from "../../../../redux/state";
 
 type MyPostsPropsType = {
     posts: Array<PostDataType>
-    addPost: (postText: string) => void
+    addPost: () => void
+    updateNewPostText: (newText: string | undefined) => void
+    newPostText: string | undefined
 }
 
 function MyPosts(props: MyPostsPropsType) {
@@ -14,12 +16,16 @@ function MyPosts(props: MyPostsPropsType) {
 
     let newPostElement = React.createRef<HTMLTextAreaElement>() // создаем ссылку пустую, присваиваем ее переменной newPostElement
 
-    let onAddPost = () => {
+    let addPost = () => {
         //берем значение у элемента по ссылке, проверяем есть ли current (элемент по ссылке) что бы TS не ругался
-        if (newPostElement.current) {
-            props.addPost(newPostElement.current.value)
-            newPostElement.current.value = ""
-        }
+            props.addPost()
+            props.updateNewPostText('')
+
+    }
+
+    const onPostChange = () => {
+        let text = newPostElement.current?.value
+        props.updateNewPostText(text)
     }
 
     return (
@@ -27,11 +33,10 @@ function MyPosts(props: MyPostsPropsType) {
             <h3>My posts</h3>
             <div>
                 <div>
-                    <textarea ref={newPostElement}>123</textarea>
-                    {/*// присваиваем ссылку к тегу textarea*/}
-                </div>
+                    <textarea onChange={onPostChange} ref={newPostElement} value={props.newPostText}/>
+                    {/*// присваиваем ссылку к тегу textarea*/}</div>
                 <div>
-                    <button onClick={onAddPost}>Add post</button>
+                    <button onClick={addPost}>Add post</button>
                 </div>
             </div>
             <div className={s.posts}>

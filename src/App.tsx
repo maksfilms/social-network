@@ -13,7 +13,9 @@ import {StateType} from "./redux/state";
 
 type AppPropsType = {
     state: StateType
-    addPost: (postText: string) => void
+    addPost: () => void
+    updateNewPostText: (newText: string | undefined) => void
+    newPostText: string | undefined
 }
 
 function App(props: AppPropsType) {
@@ -25,7 +27,7 @@ function App(props: AppPropsType) {
                 <div className="app-wrapper-content">
                     <Route path="/dialogs" render={() => <Dialogs state={props.state.dialogsPage}/>}/>
                     <Route path="/profile"
-                           render={() => <Profile state={props.state.profilePage} addPost={props.addPost}/>}/>
+                           render={() => <Profile state={props.state.profilePage} newPostText={props.state.profilePage.newPostText} addPost={props.addPost} updateNewPostText={props.updateNewPostText}/>}/>
 
                     <Route path="/news" component={News}/>
                     <Route path="/music" component={Music}/>
