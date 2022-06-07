@@ -1,4 +1,4 @@
-import {rerenderEntireTree} from "../render";
+import {rerenderEntireTree} from "../index";
 
 export type PostDataType = {
     id: number
@@ -13,17 +13,15 @@ export type MessagesType = {
     id: number
     message: string
 }
-
 export type ProfilePageType = {
     posts: Array<PostDataType>
-    newPostText: string | undefined
+    newPostText: string
 
 }
 export type DialogsPageType = {
     messages: Array<MessagesType>
     dialogs: Array<DialogsType>
 }
-
 export type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
@@ -59,7 +57,7 @@ export let state: StateType = {
     },
 }
 
-export let addPost = () => {
+export const addPost = () => {
     let newPost: PostDataType = {
         id: new Date().getTime(), //string
         message: state.profilePage.newPostText,
@@ -69,7 +67,7 @@ export let addPost = () => {
     rerenderEntireTree(state)
 }
 
-export const updateNewPostText = (newText: string | undefined) => {
+export const updateNewPostText = (newText: string) => {
     state.profilePage.newPostText = newText
     rerenderEntireTree(state)
 }

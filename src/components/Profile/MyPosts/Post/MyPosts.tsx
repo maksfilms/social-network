@@ -7,7 +7,7 @@ import {PostDataType} from "../../../../redux/state";
 type MyPostsPropsType = {
     posts: Array<PostDataType>
     addPost: () => void
-    updateNewPostText: (newText: string | undefined) => void
+    updateNewPostText: (newText: string) => void
     newPostText: string | undefined
 }
 
@@ -20,12 +20,13 @@ function MyPosts(props: MyPostsPropsType) {
         //берем значение у элемента по ссылке, проверяем есть ли current (элемент по ссылке) что бы TS не ругался
             props.addPost()
             props.updateNewPostText('')
-
     }
 
     const onPostChange = () => {
-        let text = newPostElement.current?.value
-        props.updateNewPostText(text)
+        if (newPostElement.current) {
+            let text = newPostElement.current.value
+            props.updateNewPostText(text)
+        }
     }
 
     return (
