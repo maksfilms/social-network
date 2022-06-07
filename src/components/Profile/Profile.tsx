@@ -9,7 +9,7 @@ type ProfilePropsType = {
     state: ProfilePageType
     addPost: () => void
     updateNewPostText: (newText: string) => void
-    newPostText: string | undefined
+    newPostText: string
 }
 
 function Profile(props: ProfilePropsType) {

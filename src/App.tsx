@@ -15,7 +15,7 @@ type AppPropsType = {
     state: StateType
     addPost: () => void
     updateNewPostText: (newText: string) => void
-    newPostText: string | undefined
+    newPostText: string
 }
 
 function App(props: AppPropsType) {
