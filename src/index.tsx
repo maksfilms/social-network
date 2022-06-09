@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import {StateType} from "./redux/state";
-import {addPost, updateNewPostText} from "./redux/state";
+import {addPost, updateNewPostText, subscribe} from "./redux/state";
 
 
 export let rerenderEntireTree = (state: StateType) => {
@@ -15,6 +15,8 @@ export let rerenderEntireTree = (state: StateType) => {
 }
 
 rerenderEntireTree(state)
+
+subscribe(rerenderEntireTree)
 
 
 
