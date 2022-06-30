@@ -4,6 +4,7 @@ import Post from "./Post";
 import {PostDataType} from "../../../../redux/state";
 
 
+
 type MyPostsPropsType = {
     posts: Array<PostDataType>
     addPost: () => void

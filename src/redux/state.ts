@@ -1,5 +1,4 @@
-
-type PostDataType = {
+export type PostDataType = {
     id: number
     message: string | undefined
     likesCount: number
@@ -26,12 +25,11 @@ export type StateType = {
     dialogsPage: DialogsPageType
 }
 
-
 export type StoreType = {
     _state: StateType,
     addPost: () => void
     updateNewPostText: (newText: string) => void
-    _rerenderEntireTree: (state: StateType) => void
+    _callSubscriber: (state: StateType) => void
     subscribe: (any: (any)) => void
     getState: () => StateType
 }
@@ -65,6 +63,9 @@ export const store: StoreType = {
             ]
         },
     },
+    _callSubscriber(state: StateType) {
+        console.log("state changed") // просто заглушка
+    },
     addPost() {
         let newPost: PostDataType = {
             id: new Date().getTime(), //string
@@ -72,17 +73,14 @@ export const store: StoreType = {
             likesCount: 0
         }
         this._state.profilePage.posts.push(newPost)
-        this._rerenderEntireTree(this._state)
+        this._callSubscriber(this._state)
     },
     updateNewPostText(newText: string) {
         this._state.profilePage.newPostText = newText
-        this._rerenderEntireTree(this._state)
-    },
-    _rerenderEntireTree(state: StateType) {
-        console.log("state")
+        this._callSubscriber(this._state)
     },
     subscribe(observer: (state: StateType) => void) {
-        this._rerenderEntireTree = observer
+        this._callSubscriber = observer
     },
     getState() {
         return this._state
