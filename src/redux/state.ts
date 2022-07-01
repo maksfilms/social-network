@@ -26,12 +26,20 @@ export type StateType = {
 }
 
 export type StoreType = {
-    _state: StateType,
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
+    _state: StateType
     _callSubscriber: (state: StateType) => void
     subscribe: (any: (any)) => void
     getState: () => StateType
+    dispatch: (action: AddPostActionType | UpdateNewPostActionType) => void
+}
+
+type AddPostActionType = {
+    type: "ADD-POST"
+}
+
+type UpdateNewPostActionType = {
+    type: "UPDATE-NEW-POST-TEXT"
+    newText: string
 }
 
 export const store: StoreType = {
@@ -63,28 +71,32 @@ export const store: StoreType = {
             ]
         },
     },
-    _callSubscriber(state: StateType) {
+    _callSubscriber(state: StateType) { 
         console.log("state changed") // просто заглушка
     },
-    addPost() {
-        let newPost: PostDataType = {
-            id: new Date().getTime(), //string
-            message: this._state.profilePage.newPostText,
-            likesCount: 0
-        }
-        this._state.profilePage.posts.push(newPost)
-        this._callSubscriber(this._state)
-    },
-    updateNewPostText(newText: string) {
-        this._state.profilePage.newPostText = newText
-        this._callSubscriber(this._state)
-    },
+
     subscribe(observer: (state: StateType) => void) {
-        this._callSubscriber = observer
+        this._callSubscriber = observer // присваивает значение функции _callSubscriber от rerenderEntireTree из index
     },
     getState() {
         return this._state
+    },
+
+    dispatch(action) {
+        if (action.type === "ADD-POST") {
+            let newPost: PostDataType = {
+                id: new Date().getTime(), //string
+                message: this._state.profilePage.newPostText,
+                likesCount: 0
+            }
+            this._state.profilePage.posts.push(newPost)
+            this._callSubscriber(this._state)
+        } else if (action.type === "UPDATE-NEW-POST-TEXT") {
+            this._state.profilePage.newPostText = action.newText
+            this._callSubscriber(this._state)
+        }
     }
+
 }
 
 

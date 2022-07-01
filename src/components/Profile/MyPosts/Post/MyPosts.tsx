@@ -1,28 +1,26 @@
 import React, {ChangeEvent} from "react";
 import s from "./MyPosts.module.css";
 import Post from "./Post";
-import {PostDataType} from "../../../../redux/state";
-
+import {ProfilePageType} from "../../../../redux/state";
 
 
 type MyPostsPropsType = {
-    posts: Array<PostDataType>
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
-    newPostText: string
+    profilePage: ProfilePageType
+    dispatch: (action: any) => void
 }
 
 function MyPosts(props: MyPostsPropsType) {
-    let postsElement = props.posts.map(p => <Post key={p.id} message={p.message} likesCount={p.likesCount}/>)
+    let postsElement = props.profilePage.posts.map(p => <Post key={p.id} message={p.message}
+                                                              likesCount={p.likesCount}/>)
 
 
     let addPost = () => {
-        props.addPost()
-        props.updateNewPostText("")
+        props.dispatch({type: "ADD-POST"})
     }
 
     const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.updateNewPostText(e.currentTarget.value)
+        let currentText = e.currentTarget.value
+        props.dispatch({type: "UPDATE-NEW-POST-TEXT", newText: currentText})
     }
 
     return (
@@ -30,7 +28,7 @@ function MyPosts(props: MyPostsPropsType) {
             <h3>My posts</h3>
             <div>
                 <div>
-                    <textarea onChange={onPostChange} value={props.newPostText}/>
+                    <textarea onChange={onPostChange} value={props.profilePage.newPostText}/>
                 </div>
                 <div>
                     <button onClick={addPost}>Add post</button>
