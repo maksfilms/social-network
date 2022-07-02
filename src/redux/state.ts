@@ -32,20 +32,20 @@ export type StoreType = {
     getState: () => StateType
     dispatch: (action: ActionsTypes) => void
 }
-
-type AddPostActionType = {
-    type: "ADD-POST"
-}
-
-type UpdateNewPostActionType = {
-    type: "UPDATE-NEW-POST-TEXT"
-    newText: string
-}
-
 type ActionsTypes = AddPostActionType | UpdateNewPostActionType
+
+
+type AddPostActionType = ReturnType<typeof addPostActionCreator> // создаем тип на основе ретурна функции addPostActionCreator
+
+
+type UpdateNewPostActionType = ReturnType<typeof updateNewPostTextActionCreator>
 
 const ADD_POST = "ADD-POST"
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
+
+export const addPostActionCreator = () => ({type: ADD_POST} as const)
+
+export const updateNewPostTextActionCreator = (text: string) => ({type: UPDATE_NEW_POST_TEXT, newText: text} as const)
 
 export const store: StoreType = {
     _state: {
@@ -103,9 +103,6 @@ export const store: StoreType = {
     }
 }
 
-export const addPostActionCreator = ():AddPostActionType => ({type: ADD_POST}) // функция с типизацией возвращает только объект
 
-
-export const updateNewPostTextActionCreator = (newText: string):UpdateNewPostActionType => ({type: UPDATE_NEW_POST_TEXT, newText})
 
 
