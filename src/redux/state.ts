@@ -101,12 +101,9 @@ export const store: StoreType = {
     }
 }
 
-export const addPostActionCreator = () => {
-    return {type: ADD_POST}
-}
+export const addPostActionCreator = () => ({type: ADD_POST}) // возвращает только объект
 
-export const updateNewPostTextActionCreator = (newText: string) => {
-    return {type: UPDATE_NEW_POST_TEXT, newText}
-}
+
+export const updateNewPostTextActionCreator = (newText: string) => ({type: UPDATE_NEW_POST_TEXT, newText})
 
 
