@@ -30,7 +30,7 @@ export type StoreType = {
     _callSubscriber: (state: StateType) => void
     subscribe: (any: (any)) => void
     getState: () => StateType
-    dispatch: (action: AddPostActionType | UpdateNewPostActionType) => void
+    dispatch: (action: ActionsTypes) => void
 }
 
 type AddPostActionType = {
@@ -41,6 +41,8 @@ type UpdateNewPostActionType = {
     type: "UPDATE-NEW-POST-TEXT"
     newText: string
 }
+
+type ActionsTypes = AddPostActionType | UpdateNewPostActionType
 
 const ADD_POST = "ADD-POST"
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
@@ -101,9 +103,9 @@ export const store: StoreType = {
     }
 }
 
-export const addPostActionCreator = () => ({type: ADD_POST}) // возвращает только объект
+export const addPostActionCreator = ():AddPostActionType => ({type: ADD_POST}) // функция с типизацией возвращает только объект
 
 
-export const updateNewPostTextActionCreator = (newText: string) => ({type: UPDATE_NEW_POST_TEXT, newText})
+export const updateNewPostTextActionCreator = (newText: string):UpdateNewPostActionType => ({type: UPDATE_NEW_POST_TEXT, newText})
 
 
