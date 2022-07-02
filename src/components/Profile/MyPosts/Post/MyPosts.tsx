@@ -1,7 +1,7 @@
 import React, {ChangeEvent} from "react";
 import s from "./MyPosts.module.css";
 import Post from "./Post";
-import {ProfilePageType} from "../../../../redux/state";
+import {ProfilePageType, addPostActionCreator, updateNewPostTextActionCreator} from "../../../../redux/state";
 
 
 type MyPostsPropsType = {
@@ -15,12 +15,12 @@ function MyPosts(props: MyPostsPropsType) {
 
 
     let addPost = () => {
-        props.dispatch({type: "ADD-POST"})
+        props.dispatch(addPostActionCreator())
     }
 
     const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let currentText = e.currentTarget.value
-        props.dispatch({type: "UPDATE-NEW-POST-TEXT", newText: currentText})
+        props.dispatch(updateNewPostTextActionCreator(currentText))
     }
 
     return (

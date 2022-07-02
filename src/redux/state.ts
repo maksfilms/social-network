@@ -96,7 +96,14 @@ export const store: StoreType = {
             this._callSubscriber(this._state)
         }
     }
+}
 
+export const addPostActionCreator = () => {
+    return {type: "ADD-POST"}
+}
+
+export const updateNewPostTextActionCreator = (newText: string) => {
+    return {type: "UPDATE-NEW-POST-TEXT", newText}
 }
 
 
