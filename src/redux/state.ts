@@ -19,6 +19,7 @@ export type ProfilePageType = {
 export type DialogsPageType = {
     messages: Array<MessagesType>
     dialogs: Array<DialogsType>
+    newMessageText: string
 }
 export type StateType = {
     profilePage: ProfilePageType
@@ -28,24 +29,25 @@ export type StateType = {
 export type StoreType = {
     _state: StateType
     _callSubscriber: (state: StateType) => void
-    subscribe: (any: (any)) => void
+    subscribe: (observer: (state: StateType) => void) => void
     getState: () => StateType
     dispatch: (action: ActionsTypes) => void
 }
-type ActionsTypes = AddPostActionType | UpdateNewPostActionType
-
-
+export type ActionsTypes = AddPostActionType | UpdateNewPostActionType | updateNewMessagesTextActionCreatorType | addMessageActionCreatorType
 type AddPostActionType = ReturnType<typeof addPostActionCreator> // создаем тип на основе ретурна функции addPostActionCreator
-
-
 type UpdateNewPostActionType = ReturnType<typeof updateNewPostTextActionCreator>
+type updateNewMessagesTextActionCreatorType = ReturnType<typeof updateNewMessagesTextActionCreator>
+type addMessageActionCreatorType = ReturnType<typeof addMessageActionCreator>
 
 const ADD_POST = "ADD-POST"
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
+const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT"
+const ADD_MESSAGE = "ADD-MESSAGE"
 
 export const addPostActionCreator = () => ({type: ADD_POST} as const)
-
 export const updateNewPostTextActionCreator = (text: string) => ({type: UPDATE_NEW_POST_TEXT, newText: text} as const)
+export const addMessageActionCreator = () => ({type: ADD_MESSAGE} as const)
+export const updateNewMessagesTextActionCreator = (text: string) => ({type: UPDATE_NEW_MESSAGE_TEXT, newText: text} as const)
 
 export const store: StoreType = {
     _state: {
@@ -73,7 +75,8 @@ export const store: StoreType = {
                 {id: 3, message: "Nice to meet you."},
                 {id: 4, message: "What are you doing?"},
                 {id: 5, message: "Hi all!"}
-            ]
+            ],
+            newMessageText: "",
         },
     },
     _callSubscriber(state: StateType) {
@@ -99,7 +102,11 @@ export const store: StoreType = {
         } else if (action.type === UPDATE_NEW_POST_TEXT) {
             this._state.profilePage.newPostText = action.newText
             this._callSubscriber(this._state)
+        } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
+            this._state.dialogsPage.newMessageText = action.newText
+            this._callSubscriber(this._state)
         }
+
     }
 }
 
