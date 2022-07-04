@@ -33,21 +33,18 @@ export type StoreType = {
     getState: () => StateType
     dispatch: (action: ActionsTypes) => void
 }
-export type ActionsTypes = AddPostActionType | UpdateNewPostActionType | updateNewMessagesTextActionCreatorType | addMessageActionCreatorType
-type AddPostActionType = ReturnType<typeof addPostActionCreator> // создаем тип на основе ретурна функции addPostActionCreator
-type UpdateNewPostActionType = ReturnType<typeof updateNewPostTextActionCreator>
-type updateNewMessagesTextActionCreatorType = ReturnType<typeof updateNewMessagesTextActionCreator>
-type addMessageActionCreatorType = ReturnType<typeof addMessageActionCreator>
+export type ActionsTypes = ReturnType<typeof addPostActionCreator> | ReturnType<typeof updateNewPostTextActionCreator> | ReturnType<typeof updateNewMessagesTextActionCreator> | ReturnType<typeof addMessageActionCreator>
+
 
 const ADD_POST = "ADD-POST"
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
 const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT"
-const ADD_MESSAGE = "ADD-MESSAGE"
+const ADD_NEW_MESSAGE = "ADD-NEW-MESSAGE"
 
 export const addPostActionCreator = () => ({type: ADD_POST} as const)
 export const updateNewPostTextActionCreator = (text: string) => ({type: UPDATE_NEW_POST_TEXT, newText: text} as const)
-export const addMessageActionCreator = () => ({type: ADD_MESSAGE} as const)
 export const updateNewMessagesTextActionCreator = (text: string) => ({type: UPDATE_NEW_MESSAGE_TEXT, newText: text} as const)
+export const addMessageActionCreator = () => ({type: ADD_NEW_MESSAGE} as const)
 
 export const store: StoreType = {
     _state: {
@@ -104,6 +101,10 @@ export const store: StoreType = {
             this._callSubscriber(this._state)
         } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
             this._state.dialogsPage.newMessageText = action.newText
+            this._callSubscriber(this._state)
+        } else if (action.type === ADD_NEW_MESSAGE) {
+            let newMessage = {id: new Date().getTime(), message: this._state.dialogsPage.newMessageText}
+            this._state.dialogsPage.messages.push(newMessage)
             this._callSubscriber(this._state)
         }
 
