@@ -1,5 +1,5 @@
-import profileReducer from "./profile-reducer";
-import dialogsReducer from "./dialogs-reducer";
+import profileReducer, {addPostActionCreator, updateNewPostTextActionCreator} from "./profile-reducer";
+import dialogsReducer, {addMessageActionCreator, updateNewMessagesTextActionCreator} from "./dialogs-reducer";
 
 
 export type PostDataType = {
@@ -37,25 +37,12 @@ export type StoreType = {
     getState: () => StateType
     dispatch: (action: ActionsTypes) => void
 }
-export type ActionsTypes =
-    ReturnType<typeof addPostActionCreator>
+
+export type ActionsTypes = ReturnType<typeof addPostActionCreator>
     | ReturnType<typeof updateNewPostTextActionCreator>
     | ReturnType<typeof updateNewMessagesTextActionCreator>
     | ReturnType<typeof addMessageActionCreator>
 
-
-const ADD_POST = "ADD-POST"
-const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
-const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT"
-const ADD_NEW_MESSAGE = "ADD-NEW-MESSAGE"
-
-export const addPostActionCreator = () => ({type: ADD_POST} as const)
-export const updateNewPostTextActionCreator = (text: string) => ({type: UPDATE_NEW_POST_TEXT, newText: text} as const)
-export const updateNewMessagesTextActionCreator = (text: string) => ({
-    type: UPDATE_NEW_MESSAGE_TEXT,
-    newText: text
-} as const)
-export const addMessageActionCreator = () => ({type: ADD_NEW_MESSAGE} as const)
 
 export const store: StoreType = {
     _state: {
@@ -97,7 +84,6 @@ export const store: StoreType = {
     getState() {
         return this._state
     },
-
     dispatch(action) {
         this._state.profilePage = profileReducer(this._state.profilePage, action)
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
