@@ -1,7 +1,6 @@
 import profileReducer, {addPostActionCreator, updateNewPostTextActionCreator} from "./profile-reducer";
 import dialogsReducer, {addMessageActionCreator, updateNewMessagesTextActionCreator} from "./dialogs-reducer";
 
-
 export type PostDataType = {
     id: number
     message: string | undefined

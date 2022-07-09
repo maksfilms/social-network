@@ -6,7 +6,19 @@ const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
 export const addPostActionCreator = () => ({type: ADD_POST} as const)
 export const updateNewPostTextActionCreator = (text: string) => ({type: UPDATE_NEW_POST_TEXT, newText: text} as const)
 
-const profileReducer = (state: ProfilePageType, action: ActionsTypes) => {
+const InitialState = {
+    posts: [
+        {id: 1, message: "Hi! how are you?", likesCount: 12},
+        {id: 2, message: "My first post", likesCount: 3},
+        {id: 3, message: "Hello all", likesCount: 1},
+        {id: 4, message: "My name is....", likesCount: 1},
+        {id: 5, message: "My second post", likesCount: 13},
+    ],
+    newPostText: ""
+}
+
+
+const profileReducer = (state: ProfilePageType = InitialState, action: ActionsTypes) => {
     switch (action.type) {
         case ADD_POST:
             let newPost: PostDataType = {
