@@ -36,6 +36,7 @@ const dialogsReducer = (state: DialogsPageType = initialState, action: ActionsTy
         case ADD_NEW_MESSAGE:
             let newMessage = {id: new Date().getTime(), message: state.newMessageText}
             state.messages.push(newMessage)
+            state.newMessageText = ""
             return state;
         default:
             return state
